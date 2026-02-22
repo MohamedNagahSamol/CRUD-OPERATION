@@ -1,0 +1,225 @@
+body {
+  background-color: #222;
+  color: white;
+  font-family: system-ui;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+.crud {
+  width: 80%;
+  margin: auto;
+}
+.head {
+  text-align: center;
+  margin: 10px 0;
+}
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 30px;
+  background-color: #111;
+  margin: 4px;
+  border-radius: 4px;
+  padding: 4px;
+  color: aqua;
+}
+input:focus {
+  background-color: #000;
+  scale: 1.06;
+}
+.price input {
+  width: 20%;
+}
+#total {
+  background-color: rgb(228, 58, 58);
+  padding: 4px;
+  border-radius: 5px;
+}
+#total::before {
+  content: "Total: ";
+}
+button {
+  width: 100%;
+  border: none;
+  height: 34px;
+  cursor: pointer;
+  font-size: x-large;
+  background-color: rgba(110, 29, 216, 0.568);
+  border-radius: 20px;
+  transition: 0.5s;
+}
+button:hover {
+  scale: 1.04;
+  background-color: rgba(78, 30, 139, 0.568);
+  letter-spacing: 2px;
+}
+.btnsearch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.btnsearch button {
+  width: 45%;
+}
+table {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+th,
+td {
+  padding: 5px;
+}
+#deletall {
+  display: none;
+}
+.pup {
+  width: 300px;
+  height: 120px;
+  position: fixed;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #555;
+  padding: 15px;
+  border-radius: 30px;
+  display: none;
+}
+.pup div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pup div button {
+  width: 45%;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+.pup .txt {
+  text-transform: capitalize;
+  font-size: 25px;
+  font-weight: 600;
+}
+#deletall {
+  width: 44%;
+}
+.btn-s {
+  width: 44%;
+  margin-left: 10%;
+}
+.btn-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pud {
+  width: 250px;
+  height: 120px;
+  position: fixed;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #555;
+  padding: 15px;
+  border-radius: 30px;
+  display: none;
+}
+.pud * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pud .txt .p1 {
+  font-size: 25px;
+  font-weight: 600;
+}
+.pud .txt {
+  flex-direction: column;
+}
+.pud .bc {
+  margin-top: 10px;
+}
+.navbar {
+  width: 100%;
+  padding-top: 0px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+nav div ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+nav div ul li {
+  margin-left: 50px;
+  border-radius: 20px;
+  padding: 1px 20px;
+  transition: 0.3s;
+}
+nav div ul li :hover {
+  background-color: #555;
+  border-radius: 20px;
+}
+.pod {
+  width: 350px;
+  height: 170px;
+  position: fixed;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #555;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  flex-direction: column;
+
+  display: none;
+}
+.pod .txt {
+  margin-top: 20px;
+}
+.pod .bc {
+  margin-top: 20px;
+}
+.pod input {
+  margin-top: 0;
+  padding-top: 0;
+}
+.pod .bc button {
+ width: 49.2%;
+}
+.navbar-nav li a:hover{
+cursor: pointer;
+}
+.sell-screen{
+width: 100%;
+height: 40vh;
+overflow: auto;
+}
+#output_sall{
+  display: none;
+}
+#se_input{
+  display: none;
+}
+nav a :hover{
+  cursor: pointer;
+}
+.delet-:hover{
+  cursor: pointer;
+}
