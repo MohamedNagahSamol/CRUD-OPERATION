@@ -20,7 +20,7 @@ let getTotal = function () {
       Number(price.value) +
       Number(ads.value) +
       Number(taxes.value) -
-      +discount.value;
+      Number(discount.value);
     total.innerHTML = rusult;
     total.style.background = "green";
   } else {
@@ -31,65 +31,63 @@ let getTotal = function () {
 
 let datapro;
 let cashe;
-if (JSON.parse(localStorage.cashe)===null){
-  localStorage.cashe=0
+try {
+  cashe = JSON.parse(localStorage.cashe);
+  if (typeof cashe !== 'number' || cashe < 0) cashe = 0;
+} catch {
+  cashe = 0;
 }
-//localStorage.setItem('cashe',0)
-//console.log(typeof JSON.parse(localStorage.cashe))
-//console.log( JSON.parse(localStorage.cashe))
-if(JSON.parse(localStorage.cashe)>0){
-  cashe=JSON.parse(localStorage.cashe)
-   p2.innerText=cashe
-   pp.innerText=cashe
-}else{
- cashe=0
-   p2.innerText=cashe
-   pp.innerText=cashe
-}
+localStorage.setItem('cashe', JSON.stringify(cashe));
+p2.innerText = cashe;
+pp.innerText = cashe;
+
 if (localStorage.prodect != null) {
   datapro = JSON.parse(localStorage.prodect);
- 
-
 } else {
   datapro = [];
- 
 }
 
 subment.onclick = function () {
   subment.innerHTML = "Create";
 
-  let newpro = {
-    title: title.value,
-    price: price.value,
-    taxes: taxes.value,
-    discount: discount.value,
-    ads: ads.value,
-    total: total.innerHTML,
-    count: count.value,
-    category: category.value,
-  };
-  if (title.value!=''&&price.value!=''&&category.value!=''&& newpro.count<100){
-      if (mood === "create") {
-    if (newpro.count > 1) {
-     for (let i = 0; i < newpro.count; i++) {
-        datapro.push(newpro);
-         clear();
-      }
-    } else
-         {
-       datapro.push(newpro);
-         clear();
+  if (title.value==''||price.value==''||category.value==''|| Number(count.value)>=100){
+    alert('Please fill in title, price, category and ensure count is less than 100');
+    return;
+  }
+
+  if (mood === "create") {
+    let c = Number(count.value) || 1;
+    for (let i = 0; i < c; i++) {
+      let newpro = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        discount: discount.value,
+        ads: ads.value,
+        total: total.innerHTML,
+        count: count.value,
+        category: category.value,
+      };
+      datapro.push(newpro);
     }
   } else {
+    let newpro = {
+      title: title.value,
+      price: price.value,
+      taxes: taxes.value,
+      discount: discount.value,
+      ads: ads.value,
+      total: total.innerHTML,
+      count: count.value,
+      category: category.value,
+    };
     datapro[temp] = newpro;
     mood = "create";
     count.style.display = "block";
   }
 
-  }
-
   localStorage.setItem("prodect", JSON.stringify(datapro));
-   clear();
+  clear();
   read();
 };
 
@@ -155,70 +153,63 @@ let arritem=[]
  let tbody_sell = document.getElementById('tbody-sell')
 //let avli=false
 let deletdata = function (i) {
-  
-      items += "<tr><td>" +
-      (i+1) +
-      "</td> <td>" +
-      datapro[i].title +
-      "</td> <td>" +
-      datapro[i].price +
-      "</td><td>" +
-      datapro[i].ads +
-      "</td><td>" +
-      datapro[i].taxes +
-      "</td><td>" +
-      datapro[i].discount +
-      "</td><td>" +
-      datapro[i].total +
-      "</td><td>" +
-      datapro[i].category +
-      '</td>  <td><button class="update" onclick="updatedata(' +
-      i +
-      ')">update</button></td> <td class="delet-">X</td></tr>';
+  items += "<tr><td>" +
+    (i+1) +
+    "</td> <td>" +
+    datapro[i].title +
+    "</td> <td>" +
+    datapro[i].price +
+    "</td><td>" +
+    datapro[i].ads +
+    "</td><td>" +
+    datapro[i].taxes +
+    "</td><td>" +
+    datapro[i].discount +
+    "</td><td>" +
+    datapro[i].total +
+    "</td><td>" +
+    datapro[i].category +
+    '</td>  <td><button class="update" onclick="updatedata(' +
+    i +
+    ')">update</button></td> <td class="delet-">X</td></tr>';
 
-    tbody_sell.innerHTML=items;
-    //console.log(i)
-    arritem.push(i)
-   let le = Number(datapro[i].total) 
-     totalsells+=le
-  // console.log(typeof totalsells)
-  // console.log( typeof le)
-  total_sells.innerHTML= 'Total : <strong>'+totalsells+'$</strong'
-  sell_btn.onclick=()=>{
-    for(let i=0 ; i<arritem.length;i++){
+  tbody_sell.innerHTML = items;
+  arritem.push(i);
+  let le = Number(datapro[i].total);
+  totalsells += le;
+  total_sells.innerHTML = 'Total : <strong>' + totalsells + '$</strong>';
+};
+
+sell_btn.onclick = function () {
+  arritem.sort((a, b) => b - a);
+  for (let i = 0; i < arritem.length; i++) {
     datapro.splice(arritem[i], 1);
-    }
-    localStorage.prodect = JSON.stringify(datapro);
-    read();
-    items=""
-    tbody_sell.innerHTML=items;
-    ca_s(totalsells)
-    totalsells=0
-     total_sells.innerHTML= 'Total : <strong>'+totalsells+'$</strong'
   }
+  localStorage.prodect = JSON.stringify(datapro);
+  read();
+  ca_s(totalsells);
+  arritem = [];
+  totalsells = 0;
+  items = "";
+  tbody_sell.innerHTML = "";
+  total_sells.innerHTML = 'Total : <strong>0$</strong>';
 };
 
 
 
 let but_del_y = document.querySelector(".yes")
 let but_del_N = document.querySelector(".no")
-let deletdataall = function () {
-  $(function () {
-    $('.pup').slideDown(1000);
-  });
-  but_del_y.onclick=()=>{
+but_del_y.onclick = function () {
   datapro.splice(0);
-  $(function () {
-    $('.pup').slideUp(1000);
-  });
-  localStorage.clear();
+  $('.pup').slideUp(1000);
+  localStorage.removeItem('prodect');
   read();
-  }
-  but_del_N.onclick=()=>{
-$(function () {
-    $('.pup').slideUp(1000);
-  });
-  }
+};
+but_del_N.onclick = function () {
+  $('.pup').slideUp(1000);
+};
+let deletdataall = function () {
+  $('.pup').slideDown(1000);
 };
 
 
@@ -258,13 +249,13 @@ let getsearchmood = function (id) {
 
 let getsearch = function (value) {
   let item = "";
-    for (let i = 0; i < datapro.length; i++){
-  if (moodsearch === "title") {
-   
-      if (datapro[i].title.includes(value.toLowerCase())||datapro[i].title.includes(value.toUpperCase())) {
+  let v = value.toLowerCase();
+  for (let i = 0; i < datapro.length; i++) {
+    if (moodsearch === "title") {
+      if (datapro[i].title.toLowerCase().includes(v)) {
         item +=
           "<tr><td>" +
-          i +
+          (i + 1) +
           "</td> <td>" +
           datapro[i].title +
           "</td> <td>" +
@@ -281,14 +272,14 @@ let getsearch = function (value) {
           datapro[i].category +
           '</td>  <td><button class="update" onclick="updatedata(' +
           i +
-          ')">update</button></td> <td><button  onclick="deletdata('+ i +')" class="delet-">sell</button></td> </tr>';
-      }  
+          ')">update</button></td> <td><button  onclick="deletdata(' + i + ')" class="delet-">sell</button></td> </tr>';
+      }
     }
-      else  
-       if (datapro[i].category.includes(value.toLowerCase())||datapro[i].category.includes(value.toUpperCase())) {
+    else
+      if (datapro[i].category.toLowerCase().includes(v)) {
         item +=
           "<tr><td>" +
-          i +
+          (i + 1) +
           "</td> <td>" +
           datapro[i].title +
           "</td> <td>" +
@@ -307,49 +298,44 @@ let getsearch = function (value) {
           i +
           ')">update</button></td> <td><button  onclick="deletdata(' +
           i +
-          ')" class="delet">sell</button></td> </tr>';
-      }  
-    }
-  
+          ')" class="delet-">sell</button></td> </tr>';
+      }
+  }
+
   tbody.innerHTML = item;
 }
-let close = document.querySelector('.close')
-let pud =()=>{
+let close_btn = document.querySelector('.pud .close')
+close_btn.onclick = function () {
+  $('.pud').slideUp(1200);
+};
+let pud = () => {
   $('.pud').slideDown(1200);
-  close.onclick=()=>{
-     $('.pud').slideUp(1200);
-  }
-}
-let ca_s=(cas)=>{
-  cashe+=cas;
-   localStorage.setItem("cashe",JSON.stringify(cashe))
-   cashe= JSON.parse(localStorage.cashe)
-
-   pp.innerText=cashe
-  p2.innerText=cashe;
-}
+};
+let ca_s = (cas) => {
+  cashe += cas;
+  localStorage.setItem("cashe", JSON.stringify(cashe));
+  pp.innerText = cashe;
+  p2.innerText = cashe;
+};
 let pod = document.querySelector('.pod')
-let pod_cl= document.querySelector('.pod .close')
+let pod_cl = document.querySelector('.pod .close')
 let clos = document.querySelector('.clos');
 let in_cl = document.getElementById('clo')
-let close_d=()=>{
-$(function () {
+pod_cl.onclick = function () {
+  $('.pod').slideUp(1000);
+};
+clos.onclick = function () {
+  $('.pod').slideUp(1000);
+  let new_ = cashe - Number(in_cl.value);
+  cashe = new_;
+  localStorage.cashe = JSON.stringify(new_);
+  pp.innerText = cashe;
+  p2.innerText = cashe;
+  in_cl.value = "";
+};
+let close_d = () => {
   $('.pod').slideDown(1200);
-  pod_cl.onclick=()=>{
-     $('.pod').slideUp(1000);
-  }
-  clos.onclick=()=>{
-    $('.pod').slideUp(1000);
-   
-    let new_ = JSON.parse(localStorage.cashe)-Number(in_cl.value)
-    cashe=new_
-    localStorage.cashe=JSON.stringify (new_)
-    pp.innerText=cashe
-  p2.innerText=cashe;
-    in_cl.value=""
-    }
-});
-}
+};
 
 
 let se_input = document.getElementById('se_input')

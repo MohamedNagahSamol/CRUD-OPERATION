@@ -206,17 +206,16 @@ nav div ul li :hover {
 .navbar-nav li a:hover{
 cursor: pointer;
 }
+#output_sall{
+  display: none;
+}
 .sell-screen{
 width: 100%;
 height: 40vh;
 overflow: auto;
 }
-#output_sall{
-  display: none;
-}
-#se_input{
-  display: none;
-}
+
+
 nav a :hover{
   cursor: pointer;
 }

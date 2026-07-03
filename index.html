@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="boot-strap/css/bootstrap.css">
+  <link rel="stylesheet" href="obj15.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product Management System - CRUDS application for managing products, sales, and cash">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+  <title>Product Management System</title>
+</head>
+
+<body>
+  <div class="crud">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" >PRODUCT MANAGEMENT SYSTEM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="close_d()">Closing today</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="salles()">Salles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="bayes()">Bayes</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- <div class="head">
+        <h1>CRUDS</h1>
+        <p>PRODECT MANAGENENT SYSTEM</p>
+    </div> -->
+    <section class="input" id="se_input">
+      <input id="title" type="text" placeholder="title">
+      <div class="price">
+        <input onkeyup="getTotal()" type="number" id="price" placeholder="price">
+        <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads">
+        <input onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes">
+        <input onkeyup="getTotal()" type="number" id="discount" placeholder="discount">
+        <small id="total"></small>
+      </div>
+      <input id="count" type="number" placeholder="count">
+      <input id="category" type="text" placeholder="category">
+      <button id="subment">Create</button>
+    </section>
+
+
+    <section class="output_sall" id="output_sall">
+      <div class="sell-screen">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>PRICE</th>
+            <th>ADS</th>
+            <th>TAXES</th>
+            <th>DISCOUNT</th>
+            <th>TOTAL</th>
+            <th>CATEGORY</th>
+            <th>UPDATE</th>
+           
+            <th >SELL</th>
+          </tr>
+          <tbody id="tbody-sell"> </tbody>
+        </table>
+      </div>
+      <div class="sell-other">
+        <div>
+          <h4> </h4>
+
+        </div>
+        <div>
+          <button id="sell-btn">Sell</button>
+        </div>
+      </div>
+
+    </section>
+    <section class="output">
+      <div class="searchblock">
+        <input type="text" placeholder="search" id="search" onkeyup="getsearch(this.value)">
+        <div class="btnsearch">
+          <button id="searchbytitle" onclick="getsearchmood(this.id)">search by title</button>
+          <button id="searchbycategory" onclick="getsearchmood(this.id)">search by category</button>
+        </div>
+        <div class="btn-all">
+          <div id="deletall">
+            <button onclick="deletdataall()" id="butdeletall">Delet all</button>
+          </div>
+          <button class="btn-s" onclick="pud()">Sales Day</button>
+        </div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>PRICE</th>
+            <th>ADS</th>
+            <th>TAXES</th>
+            <th>DISCOUNT</th>
+            <th>TOTAL</th>
+            <th>CATEGORY</th>
+            <th>UPDATE</th>
+            <th>SELL</th>
+           
+          </tr>
+          <tbody id="tbody"> </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <div class="pup">
+      <div class="txt">
+        <p>you sure wants to delete all prodects</p>
+       
+      </div>
+      <div class="buts">
+        <button class="no">No</button>
+        <button class="yes">Yes</button>
+      </div>
+    </div>
+
+
+    <div class="pud">
+      <div class="txt">
+        <p class="p1">cashe day seels </p>
+        <h1 class="p2"></h1>
+      </div>
+      <div class="bc">
+        <button class="close">Close</button>
+      </div>
+    </div>
+
+
+    <div class="pod">
+      <input type="number" name="" id="clo" placeholder="input cashe to close">
+      <div class="txt">
+        <p class="p1">Information specific to the manager </p>
+        <h1 class="p2"></h1>
+      </div>
+      <div class="bc">
+        <button class="close">No</button>
+        <button class="clos">Yes</button>
+      </div>
+
+    </div>
+
+  
+
+  </div>
+
+</body>
+<script src="boot-strap/js/jquery-3.7.1.min.js"></script>
+<script src="obj15.js"></script>
+
+</html>
